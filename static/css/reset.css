@@ -32,7 +32,6 @@ footer, header, menu, nav, section {
 
 body {
   line-height: 1;
-  background-color: #f4f4f4;
 }
 
 blockquote, q {
@@ -43,7 +42,9 @@ blockquote:before, blockquote:after,
 q:before, q:after {
   content: none;
 }
-
+img{
+  vertical-align: middle;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
