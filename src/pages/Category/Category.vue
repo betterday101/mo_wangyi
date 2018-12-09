@@ -1,118 +1,86 @@
 <template>
-  <div>
+  <div style="margin-bottom:50px">
     <header class="topSearch">
       <div class="search"><i class="icon"></i><span>搜索商品，共10000款好物品</span></div>
     </header>
     <div class="cateNavVertWrap">
       <ul id="j-cateNav" class="m-cateNavVert">
-        <li class="item"><a class="txt" href="javascript:void(0)">12.12专区</a></li>
-        <li class="item active"><a class="txt" href="javascript:void(0)">冬季专区</a></li>
-        <li class="item"><a class="txt" href="javascript:void(0)">电器</a></li>
-        <li class="item"><a class="txt" href="javascript:void(0)">洗护</a></li>
-
-        <li class="item"><a class="txt" href="javascript:void(0)">饮食</a></li>
-        <li class="item"><a class="txt" href="javascript:void(0)">餐厨</a></li>
-        <li class="item"><a class="txt" href="javascript:void(0)">婴童</a>
-        </li>
-        <li class="item"><a class="txt" href="javascript:void(0)">文体</a>
-        </li>
-        <li class="item" ><a class="txt" href="javascript:void(0)">特色区</a>
-        </li>
+        <li class="item" @click="changCurrent(index)" :class="{active:currentIndex===index}" v-for="(cate,index) in category" :key="index"><a class="txt" href="javascript:void(0)">{{cate.name}}</a></li>
       </ul>
     </div>
-    <div class="subCateList">
+    <div class="subCateList" v-if="category[currentIndex]">
        <div class="banner">
-         <img src="./images/0012.jpg" alt="">
+         <img :src="category[currentIndex].wapBannerUrl" alt="">
        </div>
-       <ul class="list">
-        <li class="cateItem">
-          <a>
-            <div class="cateImgWrapper" >
-              <img src="./images/catpic1.png" alt="" class="cateImg" >
-            </div>
-            <div class="name">经典服饰</div>
-          </a>
-        </li>
-        <li class="cateItem">
-          <a>
-            <div class="cateImgWrapper" >
-              <img src="./images/catpic2.png" alt="" class="cateImg" >
-            </div>
-            <div class="name">化妆品</div>
-          </a>
-        </li>
-        <li class="cateItem">
-          <a>
-            <div class="cateImgWrapper" >
-              <img src="./images/catpic3.png" alt="" class="cateImg" >
-            </div>
-            <div class="name">海外特色</div>
-          </a>
-        </li>
-         <li class="cateItem">
+       <ul class="cateList" v-if="category[currentIndex].type===1">
+         <li class="cateItem" v-for="(subCate,index) in category[currentIndex].subCateList">
            <a>
              <div class="cateImgWrapper" >
-               <img src="./images/catpic1.png" alt="" class="cateImg" >
+               <img :src="subCate.wapBannerUrl" alt="" class="cateImg" >
              </div>
-             <div class="name">经典服饰</div>
+             <div class="name">{{subCate.name}}</div>
            </a>
          </li>
-         <li class="cateItem">
-           <a>
-             <div class="cateImgWrapper" >
-               <img src="./images/catpic2.png" alt="" class="cateImg" >
-             </div>
-             <div class="name">化妆品</div>
-           </a>
-         </li>
-         <li class="cateItem">
-           <a>
-             <div class="cateImgWrapper" >
-               <img src="./images/catpic3.png" alt="" class="cateImg" >
-             </div>
-             <div class="name">海外特色</div>
-           </a>
-         </li>
-         <li class="cateItem">
-           <a>
-             <div class="cateImgWrapper" >
-               <img src="./images/catpic1.png" alt="" class="cateImg" >
-             </div>
-             <div class="name">经典服饰</div>
-           </a>
-         </li>
-         <li class="cateItem">
-           <a>
-             <div class="cateImgWrapper" >
-               <img src="./images/catpic2.png" alt="" class="cateImg" >
-             </div>
-             <div class="name">化妆品</div>
-           </a>
-         </li>
-         <li class="cateItem">
-           <a>
-             <div class="cateImgWrapper" >
-               <img src="./images/catpic3.png" alt="" class="cateImg" >
-             </div>
-             <div class="name">海外特色</div>
-           </a>
-         </li>
-      </ul>
+       </ul>
+       <div class="cateList" v-if="category[currentIndex].type===0" v-for="(subCate,index) in category[currentIndex].subCateList" >
+           <div class="hd">{{subCate.name}}</div>
+           <ul class="list"  v-for="(item,index) in subCate.categoryList">
+             <li class="cateItem">
+               <a>
+                 <div class="cateImgWrapper">
+                 <img :src="item.wapBannerUrl" alt="" class="cateImg">
+                </div>
+                 <div class="name">{{item.name}}</div>
+             </a>
+             </li>
+           </ul>
+       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
   export default {
     name: "category",
     data(){
-      return{
+      return {
+        currentIndex:0
+      }
+    },
+    mounted(){
+      //获取首页的数据
+      this.$store.dispatch("getCategory");
+    },
 
+    watch:{
+      category(){
+        this.$nextTick(()=>{
+          if(!this.leftScroll){
+            this.leftScroll=new BScroll(".cateNavVertWrap",{click:true});
+          }else{
+            this.leftScroll.refresh();
+          }
+        })
+      }
+    },
+
+    computed:{
+      //...mapState(["category"]),//与下面的等同
+      //获取主页面的数据
+      category(){
+        return this.$store.state.category;
+      }
+    },
+    methods:{
+      changCurrent(index){
+        this.currentIndex=index;
       }
     }
   }
-</script>
 
+</script>
 <style scoped lang="stylus">
   @import '../../common/mixins.styl'
   .topSearch
@@ -150,6 +118,7 @@
 
 
   .cateNavVertWrap
+    right-border-1px(#d9d9d9)
     position: fixed;
     top: 0.88rem;
     left: 0;
@@ -196,16 +165,31 @@
       img
         width 100%
         height 100%
-    .list
+    .cateList
       clearFix()
+      margin-bottom: 0.12rem
+      .hd
+        white-space: nowrap;
+        padding-bottom: .08rem;
+        margin-bottom: .24rem;
+        text-align: left;
+        font-size: .27rem;
+        font-weight: 700;
+        border-bottom: 1px solid #d9d9d9;
+      &:last-child
+        margin-bottom: 0;
       .cateItem
+       text-align center
        width 33.33%
        float left
        .cateImg
-         width 100%
+         width 80%
          height 100%
        .name
-         font-size 0.3rem
+         font-size 0.24rem
          text-align center
          color #333
+         height 0.72rem
+
+
 </style>

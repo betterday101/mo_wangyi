@@ -29,212 +29,326 @@
      </ul>
    </div>
   </div>
-   <div class="main-content">
-        <div class="m-tpls m-tpls-banner">
-          <a href="javascript:void(0);">
+  <div class="wrapScroll">
+   <div class="main-content" v-if="swtuijian10.length">
+     <div v-for="(tj10Item,index) in swtuijian10">
+        <div class="m-tpls m-tpls-banner"   v-if="tj10Item.ad!==null">
+          <a href="javascript:void(0);" >
             <div class="u-pic">
-              <img src="./images/shiwu1.jpg" alt="" width="100%" height="100%">
+              <img :src="tj10Item.ad.picUrl" alt="" width="100%" height="100%">
             </div>
           </a>
         </div>
-        <div class="m-tpls m-tpls-picker">
+        <div class="m-tpls m-tpls-picker" v-for="(Item,index) in tj10Item.topics" v-if="Item.type==1||Item.type==2">
           <a href="javascript:void(0)" class="u-flexbox">
             <div class="info">
               <div class="u-name">
                 <span class="ava">
-                  <img src="./images/touxiang1.png" alt="" width="100%" height="100%">
+                  <img :src="Item.avatar" alt="" width="100%" height="100%">
                 </span>
-                <span>服装组：小服</span>
+                <span>{{Item.nickname}}</span>
               </div>
-              <div class="title">双11忘买羽绒服？没关系，还有双12！</div>
-              <div class="desc">双12时髦保暖羽绒服低至6折</div>
+              <div class="title">{{Item.title}}</div>
+              <div class="desc">{{Item.subTitle}}</div>
               <div class="u-rcount">
                 <i class="ico"></i>
-                <span>21.5k人看过</span>
+                <span>{{Item.readCount}}人看过</span>
               </div>
             </div>
             <div class="u-pic">
-              <img src="./images/shiwu2.jpg" alt="" width="100%" height="100%">
+              <img :src="Item.picUrl" alt="" width="100%" height="100%">
             </div>
           </a>
         </div>
-        <div class="m-tpls m-tpls-rec">
+        <div class="m-tpls m-tpls-rec"  v-for="(Item,index) in tj10Item.topics" v-if="Item.type===0">
           <a href="javascript:void(0);" class="u-flexbox">
               <div class="u-name">
                 <span class="ava">
-                  <img src="./images/touxiang1.png" alt="" width="100%" height="100%">
+                  <img :src="Item.avatar" alt="" width="100%" height="100%">
                 </span>
-                <span>智造组：涛姐</span>
+                <span>{{Item.name}}</span>
               </div>
-              <div class="title">揭秘2018严选商品线隐藏进阶之路，为美好生活品质加分</div>
+              <div class="title">{{Item.title}}</div>
             <div class="u-pic">
-              <img src="./images/shiwu4.jpg" alt="" width="100%" height="100%">
+              <img :src="Item.picUrl" alt="" width="100%" height="100%">
             </div>
             <div class="u-rcount">
               <i class="ico">
-              </i><span>49.2k人看过</span>
+              </i><span>{{Item.readCount}}人看过</span>
             </div>
           </a>
         </div>
-        <div class="m-tpls m-tpls-look">
-       <a href="/topic/v1/pub/2u3FVHn300.html" class="wrapper">
-         <div class="u-name">
-              <span class="ava">
-                <img src="./images/touxiang1.png" alt="" width="100%" height="100%">
-              </span>
-              <span>叶****a</span>
-         </div>
-         <div class="title">颜值担当，大爱！</div>
-         <div class="m-looksingle">
-             <div class="u-pic">
-               <img src="./images/probig.jpg" alt="" width="100%">
-                 <a href="javascript:void(0)" target="_blank">
-                   <div class="m-mark-detail">
-                     <p class="u-name">复古半自动意式咖啡机</p>
-                     <p class="u-price">¥599.00</p>
-                   </div>
-                 </a>
+        <!--<div class="m-tpls m-tpls-look">-->
+       <!--<a href="/topic/v1/pub/2u3FVHn300.html" class="wrapper">-->
+         <!--<div class="u-name">-->
+              <!--<span class="ava">-->
+                <!--<img src="./images/touxiang1.png" alt="" width="100%" height="100%">-->
+              <!--</span>-->
+              <!--<span>叶****a</span>-->
+         <!--</div>-->
+         <!--<div class="title">颜值担当，大爱！</div>-->
+         <!--<div class="m-looksingle">-->
+             <!--<div class="u-pic">-->
+               <!--<img src="./images/probig.jpg" alt="" width="100%">-->
+                 <!--<a href="javascript:void(0)" target="_blank">-->
+                   <!--<div class="m-mark-detail">-->
+                     <!--<p class="u-name">复古半自动意式咖啡机</p>-->
+                     <!--<p class="u-price">¥599.00</p>-->
+                   <!--</div>-->
+                 <!--</a>-->
+             <!--</div>-->
+             <!--<div class="u-rcount"><i class="ico"></i><span>123人看过</span></div>-->
+         <!--</div>-->
+       <!--</a>-->
+     <!--</div>-->
+        <!--<div class="m-tpls m-tpls-look">-->
+       <!--<a href="/topic/v1/pub/2u3FVHn300.html" class="wrapper">-->
+         <!--<div class="u-name">-->
+              <!--<span class="ava">-->
+                <!--<img src="./images/touxiang1.png" alt="" width="100%" height="100%">-->
+              <!--</span>-->
+           <!--<span>叶****a</span>-->
+         <!--</div>-->
+         <!--<div class="title">颜值担当，大爱！</div>-->
+         <!--<div class="m-looksingle">-->
+           <!--<div class="u-pic">-->
+             <!--<img src="./images/bigpic2.jpg" alt="" width="100%">-->
+             <!--<a href="javascript:void(0)" target="_blank">-->
+               <!--<div class="m-mark-detail">-->
+                 <!--<p class="u-name">银耳雪燕窝</p>-->
+                 <!--<p class="u-price">¥1599.00</p>-->
+               <!--</div>-->
+             <!--</a>-->
+           <!--</div>-->
+           <!--<div class="u-rcount"><i class="ico"></i><span>123人看过</span></div>-->
+         <!--</div>-->
+       <!--</a>-->
+     <!--</div>-->
+        <!--<div class="m-tpls m-tpls-new">-->
+       <!--<div class="title">11月16日新品放映室</div>-->
+       <!--<div class="content">温和舒缓肌肤的补水面膜，给你的美肌来场及时雨，喝一口就元气满满的胶原蛋白液，真正由内而外滋养你的肌肤。</div>-->
+       <!--<ul class="m-gplist">-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic1.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic2.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic3.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic4.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic4.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic2.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic2.png" alt="">-->
+         <!--</li>-->
+         <!--<li>-->
+           <!--<img src="./images/smallpic3.png" alt="">-->
+         <!--</li>-->
+       <!--</ul>-->
+     <!--</div>-->
+     </div>
+     <div v-for="(moreItem,index) in swtuijianmore.result">
+       <div class="m-tpls m-tpls-picker" v-for="(item,index) in moreItem.topics" v-if="item.type==1||item.type==2">
+         <a href="javascript:void(0)" class="u-flexbox">
+           <div class="info">
+             <div class="u-name">
+                <span class="ava">
+                  <img :src="item.avatar" alt="" width="100%" height="100%">
+                </span>
+               <span>{{item.nickname}}</span>
              </div>
-             <div class="u-rcount"><i class="ico"></i><span>123人看过</span></div>
-         </div>
-       </a>
-     </div>
-        <div class="m-tpls m-tpls-look">
-       <a href="/topic/v1/pub/2u3FVHn300.html" class="wrapper">
-         <div class="u-name">
-              <span class="ava">
-                <img src="./images/touxiang1.png" alt="" width="100%" height="100%">
-              </span>
-           <span>叶****a</span>
-         </div>
-         <div class="title">颜值担当，大爱！</div>
-         <div class="m-looksingle">
-           <div class="u-pic">
-             <img src="./images/bigpic2.jpg" alt="" width="100%">
-             <a href="javascript:void(0)" target="_blank">
-               <div class="m-mark-detail">
-                 <p class="u-name">银耳雪燕窝</p>
-                 <p class="u-price">¥1599.00</p>
-               </div>
-             </a>
+             <div class="title">{{item.title}}</div>
+             <div class="desc">{{item.subTitle}}</div>
+             <div class="u-rcount">
+               <i class="ico"></i>
+               <span>{{item.readCount}}人看过</span>
+             </div>
            </div>
-           <div class="u-rcount"><i class="ico"></i><span>123人看过</span></div>
-         </div>
-       </a>
+           <div class="u-pic">
+             <img :src="item.picUrl" alt="" width="100%" height="100%">
+           </div>
+         </a>
+       </div>
+       <div class="m-tpls m-tpls-new" v-for="(item,index) in moreItem.topics" v-if="item.type===7">
+           <div class="title">{{item.title}}</div>
+           <div class="content">{{item.subTitle}}</div>
+           <ul class="m-gplist">
+             <li v-for="(liitem,index) in item.itemList" :key="index" v-if="liitem!==null">
+                <img  :src="liitem.itemUrl" alt="">
+             </li>
+           </ul>
+       </div>
+       <!--lookList不为空的时候是轮播图的样式-->
+       <div class="m-tpls m-tpls-rec"  v-for="(item,index) in moreItem.topics" v-if="item.type===0&&item.lookList===null">
+         <a href="javascript:void(0);" class="u-flexbox">
+           <div class="u-name">
+                <span class="ava">
+                  <img :src="item.avatar" alt="" width="100%" height="100%">
+                </span>
+             <span>{{item.name}}</span>
+           </div>
+           <div class="title">{{item.title}}</div>
+           <div class="u-pic">
+             <img :src="item.picUrl" alt="" width="100%" height="100%">
+           </div>
+           <div class="u-rcount">
+             <i class="ico">
+             </i><span>{{item.readCount}}人看过</span>
+           </div>
+         </a>
+       </div>
      </div>
-
-     <div class="m-tpls m-tpls-new">
-       <div class="title">11月16日新品放映室</div>
-       <div class="content">温和舒缓肌肤的补水面膜，给你的美肌来场及时雨，喝一口就元气满满的胶原蛋白液，真正由内而外滋养你的肌肤。</div>
-       <ul class="m-gplist">
-         <li>
-           <img src="./images/smallpic1.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic2.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic3.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic4.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic4.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic2.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic2.png" alt="">
-         </li>
-         <li>
-           <img src="./images/smallpic3.png" alt="">
-         </li>
-       </ul>
-     </div>
-</div>
+   </div>
+  </div>
 </div>
 </template>
 
 <script>
-    export default {
-        name: "shi-wu"
+  //type:1,type:2都是左右结构而且样式相同(m-tpls-picker)
+  //type:7 这个是8张图(m-tpls-new)
+  //type:0&&item.lookList===null 这个是上下结构(m-tpls-rec)
+  //type:0&&item.lookList===有值的话是轮播图(样式暂时没写)
+
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
+  export default {
+    name: "shi-wu",
+    mounted(){
+      //获取的数据
+      this.$store.dispatch("getSWtuijian10");
+
+    },
+    data(){
+       return{
+         itemIndex:0,
+         page:1,
+       }
+    },
+    watch:{
+      swtuijian10(){
+        this.$nextTick(()=>{
+          this._initScroll();
+        })
+      }
+    },
+    computed:{
+      //...mapState(["mainPage"]),//与下面的等同
+      //获取主页面的数据
+      swtuijian10(){
+        return this.$store.state.swtuijian10;
+      },
+      swtuijianmore(){
+        return this.$store.state.swtuijianmore;
+      },
+
+    },
+    methods:{
+         _initScroll(){
+            this.mainScroll= new BScroll('.wrapScroll',{
+               pullUpLoad: true
+            })
+
+           // 绑定滚动的事件监听
+           this.mainScroll.on('pullingUp', () => {
+              this.$store.dispatch("getSWtuijianMore",{callback:()=>{
+                  this.$nextTick(() => {
+                    debugger
+                    this.mainScroll.finishPullUp();
+                    this.mainScroll.refresh();
+                  })
+                },page:this.page++});
+           })
+        }
+
     }
+  }
+
 </script>
 
 <style scoped lang="stylus">
   @import '../../common/mixins.styl'
-  .topfix
-     background #fafafa
-     position fixed
-     top 0rem
-     width 100%
-     z-index 10000
-     .topheader
+.topfix
+   background #fafafa
+   position fixed
+   top 0rem
+   width 100%
+   z-index 10000
+   .topheader
+     height 1rem
+     display flex
+     align-items center
+     padding: 0 .26rem 0 .24rem;
+     position relative
+     border-1px(#d9d9d9)
+     .homeLink
        height 1rem
+       display inline-block
+       width .46rem
+       background url(./images/shiwutop1.png) no-repeat center center;
+       background-size 100%
+     .center-text
+        flex-grow 1
+        text-align: center
+        font-size: .28rem;
+        margin-left: 1rem
+        .item
+           vertical-align middle
+           padding 0 0.16rem
+           &.active
+              font-size: .4rem;
+              color: #b4282d;
+              font-weight: bold;
+     .rightlink
+         .search
+            height 1rem
+            display inline-block
+            width .62rem
+            background url(./images/shiwutop2.png) no-repeat center center;
+            background-size 80%
+            margin-right 0.3rem
+         .shopcart
+           height 1rem
+           display inline-block
+           width .49rem
+           background url(./images/shiwutop3.png) no-repeat center center;
+           background-size 100%
+   .topnav
+     ul
        display flex
-       align-items center
-       padding: 0 .26rem 0 .24rem;
-       position relative
        border-1px(#d9d9d9)
-       .homeLink
-         height 1rem
-         display inline-block
-         width .46rem
-         background url(./images/shiwutop1.png) no-repeat center center;
-         background-size 100%
-       .center-text
-          flex-grow 1
-          text-align: center
-          font-size: .28rem;
-          margin-left: 1rem
-          .item
-             vertical-align middle
-             padding 0 0.16rem
-             &.active
-                font-size: .4rem;
-                color: #b4282d;
-                font-weight: bold;
-       .rightlink
-           .search
-              height 1rem
-              display inline-block
-              width .62rem
-              background url(./images/shiwutop2.png) no-repeat center center;
-              background-size 80%
-              margin-right 0.3rem
-           .shopcart
-             height 1rem
-             display inline-block
-             width .49rem
-             background url(./images/shiwutop3.png) no-repeat center center;
-             background-size 100%
-     .topnav
-       ul
-         display flex
-         border-1px(#d9d9d9)
-         box-sizing: border-box;
-         height: .72rem;
-         line-height: .72rem;
-         li
-          flex-grow  1
-          text-align center
-          a
-            &.item
-              display inline-block
-              height: .72rem;
-              line-height: .72rem;
-              font-size: .28rem;
-              padding 0 .08rem
-              box-sizing: border-box;
-            &.active
-                color: #B4282D;
-                border-bottom: .04rem solid #B4282D;
-
+       box-sizing: border-box;
+       height: .72rem;
+       line-height: .72rem;
+       li
+        flex-grow  1
+        text-align center
+        a
+          &.item
+            display inline-block
+            height: .72rem;
+            line-height: .72rem;
+            font-size: .28rem;
+            padding 0 .08rem
+            box-sizing: border-box;
+          &.active
+              color: #B4282D;
+              border-bottom: .04rem solid #B4282D;
+.wrapScroll
+  position fixed
+  top 1.72rem
+  bottom 50px
+  width 100%
+  overflow hidden
+  background-color: #f4f4f4;
   .main-content
-    padding-top 1.72rem
-    background-color: #f4f4f4;
     .m-tpls
         width: 100%;
         background: #fff;
