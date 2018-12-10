@@ -23,7 +23,6 @@
         <div class="txt">
           <div class="noCart-login">
             <div class="noCart-title">去添加点什么吧</div>
-            <div class="noCart-btn">登录</div>
           </div>
         </div>
       </div>
@@ -115,15 +114,7 @@
             line-height: 1;
             font-size: .27rem;
             color: #999;
-          .noCart-btn
-            margin: auto;
-            width: 4.8rem;
-            height:.92rem;
-            font-size: .3rem;
-            line-height: .92rem;
-            color: #fff;
-            background-color: #b4282d;
-            border-radius: .03rem;
+
 
 
 </style>

@@ -10,7 +10,23 @@
         </div>
       </header>
     </div>
-    <div class="login-type" v-show="isShowloginType">
+    <div class="showLoginInfo" v-show="isShowLoginInfo">
+      <div class="logoWrap">
+        <img src="./images/yanxuanpic.png" alt="">
+      </div>
+      <p class="loginuserInfo" v-if="!user.phone">
+        用户名：{{user.name}}</p>
+      <p>
+      <p class="loginuserInfo"  v-if="!user.name">
+        <span>手机号：{{user.phone}}</span>
+      </p>
+
+      <section class="logoutbtn" v-if="user._id">
+        <input type="button"   @click="logOut" value="退出登录">
+        <!--<mt-button @click="logOut" type="danger" style="width:100%">退出登录</mt-button>-->
+      </section>
+    </div>
+    <div class="login-type" v-show="isShowloginType&&!isShowLoginInfo">
       <div class="logoWrap">
         <img src="./images/yanxuanpic.png" alt="">
       </div>
@@ -19,14 +35,10 @@
         <div class="loginbyAcount" @click="isSmsLogin=false;isShowloginType=false">账号密码登录</div>
       </div>
     </div>
-    <section class="loginContainer" v-show="!isShowloginType">
+    <section class="loginContainer" v-show="!isShowloginType&&!isShowLoginInfo">
       <div class="loginInner">
         <div class="login_header">
           <h2 class="login_logo">网易严选</h2>
-          <!--<div class="login_header_title">
-            <a href="javascript:;" :class="{on:isSmsLogin}" @click="isSmsLogin=true">短信登录</a>
-            <a href="javascript:;" :class="{on:!isSmsLogin}" @click="isSmsLogin=false">密码登录</a>
-          </div>-->
         </div>
         <div class="login_content">
           <form>
@@ -76,8 +88,9 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import {reqSendCode,reqLoginPwd,reqLoginSms} from "../../api";
-  import { MessageBox,Toast} from 'mint-ui';
+  import {MessageBox,Toast} from 'mint-ui';
   export default {
     name: "personal",
     data(){
@@ -94,13 +107,27 @@
       }
     },
     computed:{
+      isShowLoginInfo(){
+        if(Boolean(this.user.name)||Boolean(this.user.phone))
+          return true
+        else
+          return false;
+      },
+      ...mapState(["user"]),
       isRight(){
         const regexp=/^1\d{10}$/;
         return regexp.test(this.phone);
       }
     },
     methods:{
-
+      logOut(){
+        this.$store.dispatch("getlogOut");
+        this.isShowloginType=true;
+        // MessageBox.confirm('Are you sure?').then(
+        //   ()=> {this.$store.dispatch("getlogOut");},
+        //   ()=> {console.log("bbb")}//这个表示取消
+        // );
+      },
       //请求发送验证码
       async getCode(){
         //倒计时
@@ -156,7 +183,7 @@
         console.log(result);
         if(result.code===0){
           this.$store.dispatch("getUserInfo",result.data);
-          this.$router.replace("/profile");
+
         }else{
           return MessageBox.alert('登录失败！请检查登录信息是否正确！');
         }
@@ -376,4 +403,27 @@
         >.iconfont
           font-size 20px
           color #999
+  .showLoginInfo
+    padding 1rem 0.5rem 0;
+    box-sizing border-box
+    height 100%
+    background #F2F5F4
+    font-size 16px
+    .loginuserInfo
+      text-align center
+      margin-bottom 0.5rem;
+    .logoWrap
+      text-align: center;
+      padding-top: 1.6rem;
+      padding-bottom: 1.6rem;
+      img
+        width: 2rem;
+    .logoutbtn
+        input
+          width:100%
+          background #b4282d
+          height 1rem
+          color #fff
+          line-height:1rem
+
 </style>

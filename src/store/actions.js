@@ -1,5 +1,5 @@
-import {reqMainpage,reqCategory,reqSWtuijian10,reqSWtuijianmore} from '@/api'
-import {MAIN_PAGE,CATEGORY,SWTUIJIAN10,SWTUIJIANMORE} from './mutation-type'
+import {reqMainpage,reqCategory,reqSWtuijian10,reqSWtuijianmore,reqLogout} from '@/api'
+import {MAIN_PAGE,CATEGORY,SWTUIJIAN10,SWTUIJIANMORE,SAVE_USER,RESET_USER} from './mutation-type'
 
 export default{
   //1.商家信息<br/>
